@@ -77,6 +77,15 @@ class PointsController {
 
         return response.json({ ...point, items });
     }
+
+    async all(request: Request, response: Response) {
+
+        const points = await knex('points').select('*');
+
+        if (!points)
+            return response.status(400).json({ message: 'Point not found!' });
+        return response.json(points);
+    }
 }
 
 export default PointsController;
